@@ -4,11 +4,11 @@ import numpy as np
 from sklearn.cluster import KMeans
 from joblib import Parallel, delayed
 
-def kMeansRes(scaled_data, k, alpha_k=0.01):
+def kMeansRes(scaled_data, k, alpha_k=0.02):
     inertia_o = np.square((scaled_data - scaled_data.mean(axis=0))).sum()
     # fit k-means
     kmeans = KMeans(n_clusters=k, random_state=0).fit(scaled_data)
-    scaled_inertia = kmeans.inertia_
+    scaled_inertia = kmeans.inertia_ / inertia_o + alpha_k * k
     return scaled_inertia
 
 def chooseBestKforKMeansParallel(scaled_data, k_range):
