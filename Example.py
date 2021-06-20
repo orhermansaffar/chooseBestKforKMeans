@@ -1,3 +1,8 @@
+# imports
+import pandas as pd
+import numpy as np
+from sklearn.cluster import KMeans
+from joblib import Parallel, delayed
 # choose features
 data_for_clustering = data[features_for_clustering].copy()
 data_for_clustering.fillna(0,inplace=True)
